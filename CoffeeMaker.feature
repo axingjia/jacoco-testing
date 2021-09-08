@@ -39,6 +39,43 @@ Feature: CoffeeMakerFeature
               When choose PURCHASE_BEVERAGE command service
               Then it is at PURCHASE_BEVERAGE mode
 
+
+
+Scenario: Choose add and purchse
+Given a default recipe book
+  When choose ADD_RECIPE command service
+  And insert 5 dollars and purchase recipe 1
+  Then status is wrong mode
+
+
+ Scenario: Choose edit and purchase
+Given a default recipe book
+  When choose EDIT_RECIPE command service
+    And input purchase command
+    Then status is wrong mode
+
+ Scenario: Choose delete and purchase
+Given a default recipe book
+  When choose DELETE_RECIPE command service
+    And input purchase command
+    Then is not at waiting mode
+
+Scenario: Choose inventory and purchase
+Given a default recipe book
+  When choose ADD_INVENTORY command service
+    And insert 5 dollars and purchase recipe 1
+    Then status is wrong mode
+
+Scenario: Choose check and purchase
+Given a default recipe book
+  When choose CHECK_INVENTORY command service
+    And insert 5 dollars and purchase recipe 1
+    Then status is wrong mode
+
+
+
+
+
    Scenario: Add a Recipe
    Given an empty recipe book
    When add a recipe with name of Chacha, 3 units of coffee, 2 units of milk, and 2 units of sugar, and 0 units of chocolate, and price is 4 dollars
@@ -49,7 +86,7 @@ Feature: CoffeeMakerFeature
    And the recipe 1 need 4 dollars
    And the recipe 1 has name Chacha
    And it is at WAITING mode
-   
+
 
       #Priority: 2 Story Points: 1
 
@@ -128,14 +165,26 @@ Scenario: Edit a Recipe that doesn't exist
    Scenario: Add Inventory
     Given a default recipe book
    When add inventory: coffee 5, milk 4, sugar 5, chocolate 5
-   Then inventory coffee is 20, milk is 19, sugar is 20, chocolate is 20
+   And add inventory: chocolate 5
+   Then inventory coffee is 20, milk is 19, sugar is 20, chocolate is 25
     And it is at WAITING mode
 
+Scenario: Take out money
+Given a default recipe book
+When take out money
+Then it is at WAITING mode
+
+Scenario: test set inventory
+Given an empty recipe book with 10
+When take out money
+Then it is at WAITING mode
+
+Scenario: test set inventory
+Given an empty recipe book with negative
+When take out money
+Then it is at WAITING mode
 
 
-
-
-      
 
 Scenario: Purchase Beverage
    Given an empty recipe book
@@ -147,7 +196,7 @@ Scenario: Purchase Beverage
 
 
 
-# Add scenarios from the Use Cases here.  These can be Cucumber versions of the unit 
+# Add scenarios from the Use Cases here.  These can be Cucumber versions of the unit
 # tests that were required for course 1, or can be more direct expressions of the use
 # case tests found in the Requirements-coffeemaker.pdf file.
 
@@ -255,6 +304,10 @@ Then the recipe 1 is this
 
 Scenario: display recipe
 Given a default recipe book
+Then display recipe
+
+Scenario: display emptyrecipe
+Given an empty recipe book
 Then display recipe
 
 Scenario: Insert negative coin

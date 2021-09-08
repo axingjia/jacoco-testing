@@ -64,6 +64,16 @@ public class TestSteps {
 		coffeeMaker = new CoffeeMaker(recipeBook, v);
 		coffeeMakerMain = new CoffeeMakerUI(coffeeMaker);
 	}
+	private void initialize3() {
+		recipeBook = new RecipeBook();
+		Inventory v=new Inventory();
+		v.setChocolate(-10);
+		v.setCoffee(-10);
+		v.setMilk(-10);
+		v.setSugar(-10);
+		coffeeMaker = new CoffeeMaker(recipeBook, v);
+		coffeeMakerMain = new CoffeeMakerUI(coffeeMaker);
+	}
 	
     @Given("^an empty recipe book$")
     public void an_empty_recipe_book() throws Throwable {
@@ -71,7 +81,11 @@ public class TestSteps {
     }
 	@Given("^an empty recipe book with 10$")
 	public void an_empty_recipe_book_with_10() throws Throwable {
-		initialize();
+		initialize2();
+	}
+	@Given("^an empty recipe book with negative$")
+	public void an_empty_recipe_book_with_negative() throws Throwable {
+		initialize3();
 	}
 
     @Given("^add a new random recipe")
@@ -213,6 +227,11 @@ public class TestSteps {
 
 
 
+	}
+
+	@Then("is not at waiting mode")
+	public void not_waiting() throws Throwable{
+		assertNotEquals (coffeeMakerMain.getMode(),CoffeeMakerUI.Mode.WAITING);
 	}
 
 
@@ -410,6 +429,12 @@ public class TestSteps {
 //		coffeeMakerMain.UI_Input(new ChooseRecipe(recipeId-1));
 	}
 
+	@When("^input purchase command")
+	public void purchase_command() throws  Throwable{
+
+		coffeeMakerMain.UI_Input(new ChooseRecipe(0));
+	}
+
 	@Then("^change is (\\d+) dollars$")
 	public void change_is(int moneyReturn) throws Throwable{
 		int money=coffeeMakerMain.getMoneyInTray();
@@ -488,6 +513,11 @@ public class TestSteps {
 	@Then("^status is out of range$")
 	public void status_is_out_of_range() throws Throwable{
 		assertEquals(coffeeMakerMain.status,CoffeeMakerUI.Status.OUT_OF_RANGE);
+	}
+
+	@Then("^status is wrong mode$")
+	public void status_is_wrong_mode() throws Throwable{
+		assertEquals(coffeeMakerMain.status,CoffeeMakerUI.Status.WRONG_MODE);
 	}
 
 
