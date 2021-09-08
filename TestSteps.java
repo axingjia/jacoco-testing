@@ -394,6 +394,20 @@ public class TestSteps {
 
 	}
 
+	@When("^add text inventory: coffee ([a-zA-Z0-9]+), milk ([a-zA-Z0-9]+), sugar ([a-zA-Z0-9]+), chocolate ([a-zA-Z0-9]+) and InventoryException$")
+	public void add__text_inventory_and_exception(String coffeeAmt, String milkAmt, String sugarAmt, String chocoAmt) throws Throwable {
+		try{
+
+
+			coffeeMakerMain.coffeeMaker.addInventory(coffeeAmt,milkAmt,sugarAmt,chocoAmt);
+			fail("There is an exception");
+
+		}catch(InventoryException e){}
+
+
+
+	}
+
 
 	@Then("^inventory coffee is (\\d+), milk is (\\d+), sugar is (\\d+), chocolate is (\\d+)$")
 	public void check_inventory(String coffeeAmt,String milkAmt, String sugarAmt, String chocoAmt) throws Throwable{
@@ -425,6 +439,7 @@ public class TestSteps {
 	@When("^insert (-?\\d+) dollars$")
 	public void insert_coin_only(int moneyInsert) throws  Throwable{
 		coffeeMakerMain.defaultCommands(new InsertMoney(moneyInsert));
+
 //		coffeeMakerMain.UI_Input(new ChooseService(6));
 //		coffeeMakerMain.UI_Input(new ChooseRecipe(recipeId-1));
 	}
@@ -435,10 +450,24 @@ public class TestSteps {
 		coffeeMakerMain.UI_Input(new ChooseRecipe(0));
 	}
 
+	@When("^input describe recipe command")
+	public void add_command() throws  Throwable{
+
+		coffeeMakerMain.UI_Input(new DescribeRecipe(new Recipe()));
+	}
+
 	@Then("^change is (\\d+) dollars$")
 	public void change_is(int moneyReturn) throws Throwable{
 		int money=coffeeMakerMain.getMoneyInTray();
+
 		assertEquals(money,moneyReturn);
+	}
+
+	@Then("^confirm insert (\\d+) dollars$")
+	public void insert_is(int moneyInsert) throws Throwable{
+		assertEquals(coffeeMakerMain.getMoneyInserted(),moneyInsert);
+
+
 	}
 
     @Given("^a default recipe book$")
@@ -508,6 +537,12 @@ public class TestSteps {
 	@Then("^status is success$")
 	public void status_is_success() throws Throwable{
 		assertEquals(coffeeMakerMain.status,CoffeeMakerUI.Status.OK);
+		assertEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.OK);
+	}
+
+	@Then("^status is not success$")
+	public void status_is__not_success() throws Throwable{
+		assertNotEquals(coffeeMakerMain.status,CoffeeMakerUI.Status.OK);
 	}
 
 	@Then("^status is out of range$")
@@ -547,7 +582,7 @@ public class TestSteps {
 	@Then("the recipe (\\d+) is recipe (\\d+)")
 	public void recipe_is_recipe(int recipeId, int recipeId2) throws Throwable{
 		Recipe r1=coffeeMakerMain.coffeeMaker.getRecipes()[recipeId-1];
-		Recipe r2=coffeeMakerMain.coffeeMaker.getRecipes()[recipeId2-1];
+		Recipe r2=coffeeMakerMain.getRecipes()[recipeId2-1];
 
 		assertTrue(r1.equals(r2));
 

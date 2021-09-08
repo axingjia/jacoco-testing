@@ -48,17 +48,17 @@ Given a default recipe book
   Then status is wrong mode
 
 
- Scenario: Choose edit and purchase
-Given a default recipe book
-  When choose EDIT_RECIPE command service
-    And input purchase command
-    Then status is wrong mode
+# Scenario: Choose edit and purchase
+#Given an empty recipe book
+#  When choose EDIT_RECIPE command service
+#    And input describe recipe command
+#    Then status is wrong mode
 
- Scenario: Choose delete and purchase
-Given a default recipe book
-  When choose DELETE_RECIPE command service
-    And input purchase command
-    Then is not at waiting mode
+#  Scenario: Choose delete and purchase
+#Given an empty recipe book
+#  When choose DELETE_RECIPE command service
+#    And input describe recipe command
+#    Then it is at WAITING mode
 
 Scenario: Choose inventory and purchase
 Given a default recipe book
@@ -246,6 +246,23 @@ Scenario: Add Inventory negative chocolate
     Given a default recipe book
    When add inventory: coffee 5, milk 4, sugar 5, chocolate -5 and InventoryException
 
+Scenario: Add Inventory text choco
+    Given a default recipe book
+   When add text inventory: coffee 5, milk 4, sugar 5, chocolate asdf and InventoryException
+
+ Scenario: Add Inventory text milk
+    Given a default recipe book
+   When add text inventory: coffee 5, milk asdf, sugar 5, chocolate 5 and InventoryException
+
+Scenario: Add Inventory text coffee
+    Given a default recipe book
+   When add text inventory: coffee asdf, milk 4, sugar 5, chocolate 5 and InventoryException
+
+Scenario: Add Inventory text chocolate
+    Given a default recipe book
+   When add text inventory: coffee 5, milk 4, sugar 5, chocolate asdf and InventoryException
+
+
 #Scenario: Add Inventory float coffee
 #    Given a default recipe book
 #   When add inventory: coffee 1.1, milk 4, sugar 5, chocolate 5 and InventoryException
@@ -315,5 +332,12 @@ Scenario: Insert negative coin
    When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
       And insert -5 dollars
       Then status is out of range
+
+Scenario: Insert negative coin
+   Given an empty recipe book
+   When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
+      And insert 5 dollars
+      Then confirm insert 5 dollars
+
 
 
