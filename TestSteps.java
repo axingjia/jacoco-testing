@@ -117,6 +117,23 @@ public class TestSteps {
 		coffeeMakerMain.UI_Input(new DescribeRecipe(recipe1));
 	}
 
+	@When("^add a recipe with exception with name of ([a-zA-Z0-9]+), (-?\\d+) units of coffee, (-?\\d+) units of milk, and (-?\\d+) units of sugar, and (-?\\d+) units of chocolate, and price is (-?\\d+) dollars$")
+	public void add_a_new_recipe_with_negative(String name, String coffeeAmt, String milkAmt, String sugarAmt, String chocoAmt, String price) throws Throwable{
+		try{
+		recipe1 = new Recipe();
+		recipe1.setName(name);
+		recipe1.setAmtChocolate(chocoAmt);
+		recipe1.setAmtCoffee(coffeeAmt);
+		recipe1.setAmtMilk(milkAmt);
+		recipe1.setAmtSugar(sugarAmt);
+		recipe1.setPrice(price);
+//		coffeeMaker.addRecipe(recipe1);
+		coffeeMakerMain.UI_Input(new ChooseService(1));
+		coffeeMakerMain.UI_Input(new DescribeRecipe(recipe1));
+			fail("There should be an exception");
+		}catch(RecipeException e){}
+	}
+
 
 	@Then("^the recipe (\\d+) has name ([a-zA-Z_]+)$")
 	public void recipe_has_units_of_coffee(int recipeId,String name) throws Throwable{
@@ -212,6 +229,17 @@ public class TestSteps {
 		coffeeMakerMain.UI_Input(new ChooseService(3));
 		coffeeMakerMain.UI_Input(new ChooseRecipe(recipeId-1));
 		coffeeMakerMain.UI_Input(new DescribeRecipe(recipe));
+
+	}
+
+	@When("^edit the recipe (\\d+) only")
+	public void edit_recipe_only(int recipeId) throws Throwable{
+//		Recipe recipe=coffeeMakerMain.coffeeMaker.getRecipes()[recipeId-1];
+//		recipe.setAmtCoffee(coffeeAmt);
+//		coffeeMaker.editRecipe(recipeId-1,recipe);
+		coffeeMakerMain.UI_Input(new ChooseService(3));
+		coffeeMakerMain.UI_Input(new ChooseRecipe(recipeId-1));
+//		coffeeMakerMain.UI_Input(new DescribeRecipe(recipe));
 
 	}
 
@@ -446,6 +474,8 @@ public class TestSteps {
 	public void status_is_out_of_range() throws Throwable{
 		assertEquals(coffeeMakerMain.status,CoffeeMakerUI.Status.OUT_OF_RANGE);
 	}
+
+
 
 	@When("^add a empty recipe$")
 	public void add_a_empty_recipe(String name, String coffeeAmt, String milkAmt, String sugarAmt, String chocoAmt, String price) throws Throwable{

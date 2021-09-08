@@ -64,6 +64,12 @@ Feature: CoffeeMakerFeature
    Then it is at WAITING mode
    And recipe 1 is empty
 
+#   Scenario: Delete a Recipe
+#      Given an empty recipe book
+#      And delete recipe 1
+#      Then it is at WAITING mode
+#      And recipe 1 is empty
+
 
 
 #   Scenario: Delete a Recipe 2
@@ -83,11 +89,26 @@ Feature: CoffeeMakerFeature
       #completion, a status message is printed and the Coffee Maker is returned to the waiting
       #state.
 
+Scenario: Edit a Recipe that doesn't exist
+   Given an empty recipe book
+   When edit the recipe 1 only
+   Then it is at WAITING mode
+   And status is out of range
+
+#Scenario: Edit a Recipe when its null
+#   Given an empty recipe book
+#      When add a recipe with name of Chacha, 3 units of coffee, 2 units of milk, and 2 units of sugar, and 0 units of chocolate, and price is 4 dollars
+#   When edit the recipe 1 coffee 5
+#   Then it is at WAITING mode
+#   And status is out of range
+
    Scenario: Edit a Recipe
    Given a default recipe book
    When edit the recipe 1: coffee to 1
    Then the recipe 1 uses 1 units of coffee
    And it is at WAITING mode
+
+
 
 
    Scenario: Edit a Recipe 2
@@ -134,6 +155,12 @@ Scenario: Purchase Beverage
 Given an empty recipe book
    When add a recipe with name of Chacha, 3 units of coffee, 2 units of milk, and 2 units of sugar, and 0 units of chocolate, and price is 4 dollars
    Then status is success
+
+ Scenario: Add 2 Recipe and Status is Success
+ Given an empty recipe book
+   When add a recipe with name of Chacha, 3 units of coffee, 2 units of milk, and 2 units of sugar, and 0 units of chocolate, and price is 4 dollars
+   When add a recipe with name of Chacha, 3 units of coffee, 2 units of milk, and 2 units of sugar, and 0 units of chocolate, and price is 4 dollars
+   Then status is recipe not added
 
  Scenario: Add Recipe and Status is not added
 Given a default recipe book
@@ -194,6 +221,24 @@ Scenario: Purchase Beverage until not enough ingredient
       And insert 5 dollars and purchase recipe 1
       Then it is at WAITING mode
 
+Scenario: Purchase Beverage until not enough ingredient
+   Given an empty recipe book
+   When add a recipe with exception with name of Chacha, -20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
+
+Scenario: Purchase Beverage until not enough ingredient
+   Given an empty recipe book
+   When add a recipe with exception with name of Chacha, 20 units of coffee, -20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
+
+Scenario: Purchase Beverage until not enough ingredient
+   Given an empty recipe book
+   When add a recipe with exception with name of Chacha, 20 units of coffee, 20 units of milk, and -20 units of sugar, and 20 units of chocolate, and price is 4 dollars
+
+
+Scenario: Purchase Beverage until not enough ingredient
+   Given an empty recipe book
+   When add a recipe with exception with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and -20 units of chocolate, and price is 4 dollars
+
+
 Scenario: Purchase an empty recipe
 Given an empty recipe book
 When insert 5 dollars and purchase recipe 1
@@ -212,3 +257,5 @@ Scenario: Insert negative coin
    When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
       And insert -5 dollars
       Then status is out of range
+
+
