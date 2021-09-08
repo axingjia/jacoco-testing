@@ -39,8 +39,13 @@ Feature: CoffeeMakerFeature
               When choose PURCHASE_BEVERAGE command service
               Then it is at PURCHASE_BEVERAGE mode
 
+Scenario: Choose RESET
+           Given a default recipe book
+              When choose RESET command service
+              Then it is at WAITING mode
 
 
+#wrong mode
 Scenario: Choose add and purchse
 Given a default recipe book
   When choose ADD_RECIPE command service
@@ -101,11 +106,11 @@ Given a default recipe book
    Then it is at WAITING mode
    And recipe 1 is empty
 
-#   Scenario: Delete a Recipe
-#      Given an empty recipe book
-#      And delete recipe 1
-#      Then it is at WAITING mode
-#      And recipe 1 is empty
+   Scenario: Delete an empty Recipe
+      Given an empty recipe book
+      And delete recipe 1
+      Then status is not success
+      And recipe 1 is empty
 
 
 
@@ -193,6 +198,11 @@ Scenario: Purchase Beverage
       Then change is 1 dollars
       And inventory coffee is 12, milk is 13, sugar is 13, chocolate is 15
 
+Scenario: Purchase Beverage
+   Given an empty recipe book
+   When add a recipe with name of Chacha, 3 units of coffee, 2 units of milk, and 2 units of sugar, and 0 units of chocolate, and price is 4 dollars
+      And insert -5 dollars and purchase recipe 1
+      Then status is not success
 
 
 
@@ -242,9 +252,9 @@ Scenario: Add Inventory negative coffee
     Given a default recipe book
    When add inventory: coffee -5, milk 4, sugar 5, chocolate 5 and InventoryException
 
-Scenario: Add Inventory negative chocolate
+Scenario: Add Inventory negative sugar
     Given a default recipe book
-   When add inventory: coffee 5, milk 4, sugar 5, chocolate -5 and InventoryException
+   When add inventory: coffee 5, milk 4, sugar -5, chocolate 5 and InventoryException
 
 Scenario: Add Inventory text choco
     Given a default recipe book
@@ -258,9 +268,9 @@ Scenario: Add Inventory text coffee
     Given a default recipe book
    When add text inventory: coffee asdf, milk 4, sugar 5, chocolate 5 and InventoryException
 
-Scenario: Add Inventory text chocolate
+Scenario: Add Inventory text sugar
     Given a default recipe book
-   When add text inventory: coffee 5, milk 4, sugar 5, chocolate asdf and InventoryException
+   When add text inventory: coffee 5, milk 4, sugar asdf, chocolate asdf and InventoryException
 
 
 #Scenario: Add Inventory float coffee
@@ -308,6 +318,28 @@ Scenario: add recipe with negative price
    Given an empty recipe book
    When add a recipe with exception with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is -4 dollars
 
+Scenario: add recipe with text coffee
+   Given an empty recipe book
+   When add a recipe with exception with name of Chacha, asdf units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
+
+Scenario: add recipe with text milk
+   Given an empty recipe book
+   When add a recipe with exception with name of Chacha, 20 units of coffee, asdf units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
+
+Scenario: add recipe with text sugar
+   Given an empty recipe book
+   When add a recipe with exception with name of Chacha, 20 units of coffee, 20 units of milk, and asdf units of sugar, and 20 units of chocolate, and price is 4 dollars
+
+
+Scenario: add recipe with text chocolate
+   Given an empty recipe book
+   When add a recipe with exception with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and asdf units of chocolate, and price is 4 dollars
+
+Scenario: add recipe with text price
+   Given an empty recipe book
+   When add a recipe with exception with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is asdf dollars
+
+
 
 Scenario: Purchase an empty recipe
 Given an empty recipe book
@@ -339,5 +371,44 @@ Scenario: Insert negative coin
       And insert 5 dollars
       Then confirm insert 5 dollars
 
+
+Scenario Outline: Change mode
+Given an empty recipe book
+When choose <mode> command service
+Then revised: status is <status>
+And it is at <resultMode> mode
+
+Examples:
+| mode | status | resultMode |
+| ADD_RECIPE | OK | ADD_RECIPE |
+| WAITING | OK | WAITING |
+| DELETE_RECIPE | OK | DELETE_RECIPE |
+| EDIT_RECIPE | OK | EDIT_RECIPE |
+| ADD_INVENTORY | OK | ADD_INVENTORY |
+| CHECK_INVENTORY | OK |  CHECK_INVENTORY |
+| PURCHASE_BEVERAGE | OK |  PURCHASE_BEVERAGE |
+
+
+Scenario: delete and choose out of range
+Given an empty recipe book
+When choose DELETE_RECIPE command service
+And input choose command 0
+Then revised: status is OUT_OF_RANGE
+
+Scenario: sequence add and choose: wrong mode
+Given an empty recipe book
+When choose ADD_RECIPE command service
+And input choose command 0
+Then revised: status is WRONG_MODE
+
+#Scenario: Mutant Testing
+#Given an empty recipe book
+#When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
+#Then testing mutant. Has exception 0
+
+# Scenario: Mutant Testing has exception
+#Given an empty recipe book
+#When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
+#Then testing mutant. Has exception 2
 
 

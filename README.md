@@ -1,5 +1,5 @@
 # Summary
-* This is my caffee-fueled testing project completion of a coffeeMaker software provided by Coursera Software Testing Automoation specialization.
+* This is my caffee/nightmare-fueled testing project completion of a coffeeMaker software provided by Coursera Software Testing Automoation specialization. If you read the discussion forum. Lots of people will say this is impossible to complete. But not me, I am not easily giving up.
 
 * In this project, I tried to crush 2 assignment in a week. Spent 8 hours on the weekend to finish one assignment and the next.
 
@@ -7,7 +7,7 @@
 
 * One thing I learn from this project is coverage testing is a fantastic way to discover any tiny bugs in your white-box code.
 
-* Another thing I learn from this 24 hours intense project experience is that being a serious software engineer requires you to sit there for 8 or even 12 hours everyday debugging the code and try to discover any small detail of the software. Also, the behavioural way of given..when..and then is a great way to test software.
+* Another thing I learn from this 48 hours intense project experience is that being a serious software engineer requires you to sit there for 8 or even 12 hours everyday debugging the code and try to discover any small detail of the software. Also, the behavioural way of given..when..and then is a great way to test software.
 
 # The hardest part
 * The hardest part is testing the cases one by one finding out which one fail the correct version of the software. And when the project is almost done, polishing the software and having the discipline to go through it and not giving up really tests your drive.
@@ -29,6 +29,7 @@
 7. wait patiently for each submit. It reveals valuable information. If you are impatient, you will lose valuable information that costs you at least half an hour around. (This means not resubmitting, and not walking out)
 * At the end, you might realize the bug you thought is sus is actually not a bug, in this case, you have to replan your strategy before diving deep again.
 * To kill all the mutant. Sometimes you might need to reach 100% coverage
+8. When testing, it also means testing some software that you don't have access, meaning it's a blackbox testing. In this case, you need to test the software in a manual blackbox way
 
 
 # About being flexible
@@ -46,3 +47,12 @@
 
 # About business and computer science
 * A essence of software engineering is that the money you make depends on how skillful you are and how much time you have.
+
+* The problem with that, is because it's hard to scale. Yes, you can keep taking more courses and doing more projects and work on harder project
+
+* In comparison, the essence of business is that you go around the world and talk to different clients.
+*
+
+# Resource
+* Test coverage: https://medium.com/@nicklee1/why-test-code-coverage-targets-are-a-bad-idea-1b9b8ef711ef
+* PITEST is a mutant testing tool for java

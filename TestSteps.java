@@ -25,9 +25,7 @@ import edu.ncsu.csc326.coffeemaker.UICmd.*;
 import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
 import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
@@ -50,6 +48,8 @@ public class TestSteps {
 	
 	private void initialize() {
 		recipeBook = new RecipeBook();
+		recipeBook.deleteRecipe(1);
+		recipeBook.editRecipe(1,new Recipe());
 		coffeeMaker = new CoffeeMaker(recipeBook, new Inventory());
 		coffeeMakerMain = new CoffeeMakerUI(coffeeMaker);
 	}
@@ -74,6 +74,8 @@ public class TestSteps {
 		coffeeMaker = new CoffeeMaker(recipeBook, v);
 		coffeeMakerMain = new CoffeeMakerUI(coffeeMaker);
 	}
+
+
 	
     @Given("^an empty recipe book$")
     public void an_empty_recipe_book() throws Throwable {
@@ -124,6 +126,9 @@ public class TestSteps {
 			case "PURCHASE_BEVERAGE":
 				coffeeMakerMain.UI_Input(new ChooseService(6));
 				break;
+			case "RESET":
+				coffeeMakerMain.UI_Input(new Reset());
+				break;
 
 
 		}
@@ -131,6 +136,8 @@ public class TestSteps {
 
 
 	}
+
+
 
 	@When("^add a recipe with name of ([a-zA-Z0-9]+), ([a-zA-Z0-9]+) units of coffee, ([a-zA-Z0-9]+) units of milk, and ([a-zA-Z0-9]+) units of sugar, and ([a-zA-Z0-9]+) units of chocolate, and price is ([a-zA-Z0-9]+) dollars$")
 	public void add_a_new_recipe_with_spec(String name, String coffeeAmt, String milkAmt, String sugarAmt, String chocoAmt, String price) throws Throwable{
@@ -146,7 +153,7 @@ public class TestSteps {
 		coffeeMakerMain.UI_Input(new DescribeRecipe(recipe1));
 	}
 
-	@When("^add a recipe with exception with name of ([a-zA-Z0-9]+), (-?\\d+) units of coffee, (-?\\d+) units of milk, and (-?\\d+) units of sugar, and (-?\\d+) units of chocolate, and price is (-?\\d+) dollars$")
+	@When("^add a recipe with exception with name of ([a-zA-Z0-9]+), (-?[a-zA-Z0-9]+) units of coffee, (-?[a-zA-Z0-9]+) units of milk, and (-?[a-zA-Z0-9]+) units of sugar, and (-?[a-zA-Z0-9]+) units of chocolate, and price is (-?[a-zA-Z0-9]+) dollars$")
 	public void add_a_new_recipe_with_negative(String name, String coffeeAmt, String milkAmt, String sugarAmt, String chocoAmt, String price) throws Throwable{
 		try{
 		recipe1 = new Recipe();
@@ -240,6 +247,7 @@ public class TestSteps {
 
 		coffeeMakerMain.UI_Input(new ChooseService(2));
 		coffeeMakerMain.UI_Input(new ChooseRecipe(recipeId-1));
+
 	}
 
 	@Then("^recipe (\\d+) is empty$")
@@ -383,8 +391,8 @@ public class TestSteps {
 	@When("^add inventory: coffee (-?\\d+), milk (-?\\d+), sugar (-?\\d+), chocolate (-?\\d+) and InventoryException$")
 	public void add_inventory_and_exception(String coffeeAmt, String milkAmt, String sugarAmt, String chocoAmt) throws Throwable {
 		try{
-
-
+			coffeeMakerMain.mode=CoffeeMakerUI.Mode.ADD_INVENTORY;
+			coffeeMakerMain.UI_Input(new AddInventory(Integer.parseInt(coffeeAmt),Integer.parseInt(milkAmt),Integer.parseInt(sugarAmt),Integer.parseInt(chocoAmt)));
 			coffeeMakerMain.coffeeMaker.addInventory(coffeeAmt,milkAmt,sugarAmt,chocoAmt);
 			fail("There is an exception");
 
@@ -448,6 +456,11 @@ public class TestSteps {
 	public void purchase_command() throws  Throwable{
 
 		coffeeMakerMain.UI_Input(new ChooseRecipe(0));
+	}
+	@When("^input choose command (\\d+)")
+	public void choose_command(int choose) throws  Throwable{
+
+		coffeeMakerMain.UI_Input(new ChooseRecipe(choose));
 	}
 
 	@When("^input describe recipe command")
@@ -540,6 +553,40 @@ public class TestSteps {
 		assertEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.OK);
 	}
 
+	@Then("^revised: status is ([a-zA-Z]+)")
+	public void status_revise(String status){
+		switch (status){
+			case "OK":
+				assertEquals(coffeeMakerMain.status,CoffeeMakerUI.Status.OK);
+				assertEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.OK);
+				break;
+			case "WRONG_MODE":
+				assertEquals(coffeeMakerMain.status,CoffeeMakerUI.Status.WRONG_MODE);
+				assertEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.WRONG_MODE);
+				break;
+			case "RECIPE_NOT_ADDED":
+				assertEquals(coffeeMakerMain.status,CoffeeMakerUI.Status.RECIPE_NOT_ADDED);
+				assertEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.RECIPE_NOT_ADDED);
+				break;
+			case "OUT_OF_RANGE":
+				assertEquals(coffeeMakerMain.status,CoffeeMakerUI.Status.OUT_OF_RANGE);
+				assertEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.OUT_OF_RANGE);
+				break;
+			case "INSUFFICIENT_FUNDS":
+				assertEquals(coffeeMakerMain.status,CoffeeMakerUI.Status.INSUFFICIENT_FUNDS);
+				assertEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.INSUFFICIENT_FUNDS);
+				break;
+			case "UNKNOWN_ERROR":
+				assertEquals(coffeeMakerMain.status,CoffeeMakerUI.Status.UNKNOWN_ERROR);
+				assertEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.UNKNOWN_ERROR);
+				break;
+
+
+
+		}
+
+	}
+
 	@Then("^status is not success$")
 	public void status_is__not_success() throws Throwable{
 		assertNotEquals(coffeeMakerMain.status,CoffeeMakerUI.Status.OK);
@@ -596,6 +643,10 @@ public class TestSteps {
 		assertEquals(r1,r1);
 		assertTrue(r1.equals(r1));
 		assertFalse(r1.equals(new Recipe()));
+		Recipe r2=coffeeMakerMain.coffeeMaker.getRecipes()[recipeId-1];
+		Recipe r3=coffeeMakerMain.getRecipes()[recipeId-1];
+
+		assertTrue(r2.equals(r3));
 
 	}
 
@@ -617,6 +668,86 @@ public class TestSteps {
 		coffeeMakerMain.UI_Input(new ChooseService(4));
 
 		coffeeMakerMain.UI_Input(new AddInventory(0,0,0,chocoAmt));
+	}
+
+	@Then("testing mutant. Has exception (\\d)")
+	public void mutant(int hasException) throws Throwable{
+		CheckInventory cmd=new CheckInventory();
+		assertEquals(cmd.getInventory(),null);
+		coffeeMakerMain.UI_Input(new InsertMoney(0));
+		assertEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.OUT_OF_RANGE);
+		coffeeMakerMain.displayRecipes();
+		coffeeMakerMain.mode=CoffeeMakerUI.Mode.EDIT_RECIPE;
+		coffeeMakerMain.UI_Input(new ChooseRecipe(2));
+		assertEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.OUT_OF_RANGE);
+		coffeeMakerMain.mode=CoffeeMakerUI.Mode.EDIT_RECIPE;
+		coffeeMakerMain.UI_Input(new DescribeRecipe(new Recipe()));
+		assertEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.RECIPE_NOT_ADDED);
+		coffeeMakerMain.mode=CoffeeMakerUI.Mode.EDIT_RECIPE;
+		coffeeMakerMain.UI_Input(new AddInventory(1,1,1,1));
+		assertEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.WRONG_MODE);
+		coffeeMakerMain.mode=CoffeeMakerUI.Mode.PURCHASE_BEVERAGE;
+		coffeeMakerMain.UI_Input(new AddInventory(1,1,1,1));
+		assertEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.WRONG_MODE);
+
+
+
+		coffeeMakerMain.coffeeMaker.makeCoffee(1,4);
+		assertEquals(coffeeMakerMain.getMoneyInTray(),0);
+
+		Inventory v= new Inventory();
+		assertEquals(v.getChocolate(),15);
+		assertEquals(v.getCoffee(),15);
+		assertEquals(v.getMilk(),15);
+		assertEquals(v.getSugar(),15);
+
+		Inventory v2= new Inventory();
+		v2.setCoffee(0);
+		v2.setMilk(0);
+		v2.setSugar(0);
+		v2.setChocolate(0);
+		assertEquals(v.getChocolate(),0);
+		assertEquals(v.getCoffee(),0);
+		assertEquals(v.getMilk(),0);
+		assertEquals(v.getSugar(),0);
+
+		Recipe r= new Recipe();
+//		r.setAmtCoffee(5+"");
+//		r.setAmtMilk(5+"");
+//		r.setAmtSugar(5+"");
+//		r.setAmtChocolate(5+"");
+//		RecipeBook book=new RecipeBook();
+//		book.addRecipe(r);
+//		assertNotEquals(book.editRecipe(0,r),null);
+
+
+		//Trying test print message:
+
+
+//		ByteArrayOutputStream out = new ByteArrayOutputStream();
+//		System.setOut(new PrintStream(out));
+//		coffeeMakerMain.coffeeMaker.makeCoffee(3,10);
+//		String consoleOutput = "No recipe!"+System.getProperty("line.separator");
+//		assertEquals(consoleOutput, out.toString());
+//
+//		ByteArrayOutputStream out2 = new ByteArrayOutputStream();
+//		System.setOut(new PrintStream(out2));
+//		coffeeMakerMain.coffeeMaker.makeCoffee(0,100);
+//		String consoleOutput2 = "using recipes failed: "+coffeeMakerMain.coffeeMaker.getRecipes()[0].getPrice()+System.getProperty("line.separator");
+//		assertEquals(consoleOutput2, out2.toString());
+
+
+		if (hasException==2){
+			try{
+				r.setAmtChocolate(""+(-1));
+				r.setAmtSugar(""+(-1));
+				r.setAmtMilk(""+(-1));
+				r.setAmtCoffee(""+(-1));
+				fail("there should be an exception");
+
+			} catch(RecipeException e){}
+
+		}
 	}
 
 
