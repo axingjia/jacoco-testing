@@ -221,22 +221,26 @@ Scenario: Purchase Beverage until not enough ingredient
       And insert 5 dollars and purchase recipe 1
       Then it is at WAITING mode
 
-Scenario: Purchase Beverage until not enough ingredient
+Scenario: add recipe with negative coffee
    Given an empty recipe book
    When add a recipe with exception with name of Chacha, -20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
 
-Scenario: Purchase Beverage until not enough ingredient
+Scenario: add recipe with negative milk
    Given an empty recipe book
    When add a recipe with exception with name of Chacha, 20 units of coffee, -20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
 
-Scenario: Purchase Beverage until not enough ingredient
+Scenario: add recipe with negative sugar
    Given an empty recipe book
    When add a recipe with exception with name of Chacha, 20 units of coffee, 20 units of milk, and -20 units of sugar, and 20 units of chocolate, and price is 4 dollars
 
 
-Scenario: Purchase Beverage until not enough ingredient
+Scenario: add recipe with negative chocolate
    Given an empty recipe book
    When add a recipe with exception with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and -20 units of chocolate, and price is 4 dollars
+
+Scenario: add recipe with negative price
+   Given an empty recipe book
+   When add a recipe with exception with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is -4 dollars
 
 
 Scenario: Purchase an empty recipe
@@ -244,9 +248,10 @@ Given an empty recipe book
 When insert 5 dollars and purchase recipe 1
 Then it is at WAITING mode
 
-Scenario: two recipe is the same
+Scenario: two recipe is this
 Given a default recipe book
-Then the recipe 1 is recipe 1
+Then the recipe 1 is this
+
 
 Scenario: display recipe
 Given a default recipe book

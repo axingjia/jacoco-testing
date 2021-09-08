@@ -53,11 +53,26 @@ public class TestSteps {
 		coffeeMaker = new CoffeeMaker(recipeBook, new Inventory());
 		coffeeMakerMain = new CoffeeMakerUI(coffeeMaker);
 	}
+
+	private void initialize2() {
+		recipeBook = new RecipeBook();
+		Inventory v=new Inventory();
+		v.setChocolate(10);
+		v.setCoffee(10);
+		v.setMilk(10);
+		v.setSugar(10);
+		coffeeMaker = new CoffeeMaker(recipeBook, v);
+		coffeeMakerMain = new CoffeeMakerUI(coffeeMaker);
+	}
 	
     @Given("^an empty recipe book$")
     public void an_empty_recipe_book() throws Throwable {
         initialize();
     }
+	@Given("^an empty recipe book with 10$")
+	public void an_empty_recipe_book_with_10() throws Throwable {
+		initialize();
+	}
 
     @Given("^add a new random recipe")
 	public void add_a_new_random_recipe() throws Throwable{
@@ -508,10 +523,36 @@ public class TestSteps {
 
 	}
 
+	@Then("the recipe (\\d+) is this")
+	public void recipe_is_recipe(int recipeId) throws Throwable{
+		Recipe r1=coffeeMakerMain.coffeeMaker.getRecipes()[recipeId-1];
+//		Recipe r2=coffeeMakerMain.coffeeMaker.getRecipes()[recipeId2-1];
+		assertEquals(r1.hashCode(),r1.hashCode());
+		assertEquals(r1,r1);
+		assertTrue(r1.equals(r1));
+		assertFalse(r1.equals(new Recipe()));
+
+	}
+
+
+
 	@Then("display recipe")
 	public void display_recipe() throws Throwable{
 		coffeeMakerMain.displayRecipes();
 		assertTrue(true);
 	}
+
+	@When("take out money")
+	public void take_out_money() throws Throwable{
+		coffeeMakerMain.defaultCommands(new TakeMoneyFromTray());
+
+	}
+	@When("^add inventory: chocolate (\\d+)$")
+	public void add_inventory_chocolate(int chocoAmt) throws Throwable{
+		coffeeMakerMain.UI_Input(new ChooseService(4));
+
+		coffeeMakerMain.UI_Input(new AddInventory(0,0,0,chocoAmt));
+	}
+
 
 }
