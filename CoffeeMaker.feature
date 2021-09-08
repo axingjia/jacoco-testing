@@ -90,9 +90,6 @@ Feature: CoffeeMakerFeature
    And it is at WAITING mode
 
 
-
-
-
    Scenario: Edit a Recipe 2
       Given a default recipe book
       When edit the recipe 1: coffee to 2
@@ -106,21 +103,6 @@ Feature: CoffeeMakerFeature
       And it is at WAITING mode
 
 
-#Scenario: Edit a Recipe coffee to negative
-#      Given a default recipe book
-#      When edit the recipe 1: coffee to -1 negative and fail
-
-#    Scenario: edit a Recipe sugar to negative
-#    Given a default recipe book
-#    When edit the recipe 1: sugar to -2 negative and fail
-
-#    Scenario: edit a Recipe milk to negative
-#        Given a default recipe book
-#        When edit the recipe 1: milk to -2 negative and fail
-
-#Scenario: edit a Recipe chocolate to negative
-#    Given a default recipe book
-#    When edit the recipe 1: chocolate to -2 negative and fail
 
    Scenario: Add Inventory
     Given a default recipe book
@@ -172,41 +154,35 @@ Given an empty recipe book
       Then status is success
 
 
-#Scenario: Purchase Beverage until not enough coffee
-#   Given an empty recipe book
-#   When add a recipe with name of Chacha, 100 units of coffee, 2 units of milk, and 2 units of sugar, and 0 units of chocolate, and price is 4 dollars
-#      And insert 100 dollars and purchase recipe 1
-#      Then it is at WAITING mode
+#Scenario: Add Inventory negative choco
+#    Given a default recipe book
+#   When add inventory: coffee 5, milk 4, sugar 5, chocolate -5 and InventoryException
+
+# Scenario: Add Inventory negative milk
+#    Given a default recipe book
+#   When add inventory: coffee 5, milk -4, sugar 5, chocolate 5 and InventoryException
 
 #Scenario: Add Inventory negative coffee
 #    Given a default recipe book
 #   When add inventory: coffee -5, milk 4, sugar 5, chocolate 5 and InventoryException
 
-#Scenario: Add Inventory negative milk
-#    Given a default recipe book
-#   When add inventory: coffee 5, milk -4, sugar 5, chocolate 5 and InventoryException
-
-# Scenario: Add Inventory negative sugar
-#    Given a default recipe book
-#   When add inventory: coffee 5, milk 4, sugar -5, chocolate 5 and InventoryException
-
-#Scenario: Add Inventory negative choco
+#Scenario: Add Inventory negative chocolate
 #    Given a default recipe book
 #   When add inventory: coffee 5, milk 4, sugar 5, chocolate -5 and InventoryException
 
-#Scenario: Add Inventory text coffee
+#Scenario: Add Inventory float coffee
 #    Given a default recipe book
 #   When add inventory: coffee 1.1, milk 4, sugar 5, chocolate 5 and InventoryException
 
-#Scenario: Add Inventory text milk
+#Scenario: Add Inventory float milk
 #    Given a default recipe book
 #   When add inventory: coffee 5, milk 1.1, sugar 5, chocolate 5 and InventoryException
 
-#Scenario: Add Inventory text sugar
+#Scenario: Add Inventory float sugar
 #    Given a default recipe book
-#   When add inventory: coffee 5, milk 4, sugar 1.1, chocolate 5 and InventoryException
+#  When add inventory: coffee 5, milk 4, sugar 1.1, chocolate 5 and InventoryException
 
-#Scenario: Add Inventory text choco
+#Scenario: Add Inventory float choco
 #    Given a default recipe book
 #   When add inventory: coffee 5, milk 4, sugar 5, chocolate 1.1 and InventoryException
 
@@ -216,4 +192,4 @@ Given an empty recipe book
 #   Given an empty recipe book
 #   When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
 #      And insert 5 dollars and purchase recipe 1
-#      Then it is at WAITING mode
+#      Then it is at WAITING modeE

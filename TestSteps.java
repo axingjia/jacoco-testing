@@ -195,13 +195,13 @@ public class TestSteps {
 	public void recipe_is_empty(int recipeId) throws Throwable{
 		Recipe recipe=(Recipe)(coffeeMakerMain.coffeeMaker.getRecipes())[recipeId-1];
 //		assertEquals(recipe.toString(),"");
-//		assertEquals(recipe,null);
-		assertEquals(recipe.getName(),"");
-		assertEquals(recipe.getPrice(),0);
-		assertEquals(recipe.getAmtChocolate(),0);
-		assertEquals(recipe.getAmtCoffee(),0);
-		assertEquals(recipe.getAmtSugar(),0);
-		assertEquals(recipe.getAmtMilk(),0);
+		assertEquals(recipe,null);
+//		assertEquals(recipe.getName(),"");
+//		assertEquals(recipe.getPrice(),0);
+//		assertEquals(recipe.getAmtChocolate(),0);
+//		assertEquals(recipe.getAmtCoffee(),0);
+//		assertEquals(recipe.getAmtSugar(),0);
+//		assertEquals(recipe.getAmtMilk(),0);
 	}
 
 	@When("^edit the recipe (\\d+): coffee to (\\d+)")
@@ -307,7 +307,7 @@ public class TestSteps {
 		coffeeMakerMain.UI_Input(new DescribeRecipe(recipe));
 	}
 
-	@When("^add inventory: coffee (-?\\d+), milk (-?\\d+), sugar (-?\\d+), chocolate (-?\\d+)$")
+	@When("^add inventory: coffee (\\d+), milk (\\d+), sugar (\\d+), chocolate (\\d+)$")
 	public void add_inventory(int coffeeAmt, int milkAmt, int sugarAmt, int chocoAmt) throws Throwable {
 //		coffeeMaker.addInventory(coffeeAmt,milkAmt,sugarAmt,chocoAmt);
 		coffeeMakerMain.UI_Input(new ChooseService(4));
@@ -318,13 +318,13 @@ public class TestSteps {
 
 	}
 
-	@When("^add inventory: coffee (-?[0-9]+\\.[0-9]+), milk (-?[0-9]+\\.[0-9]+), sugar (-?[0-9]+\\.[0-9]+), chocolate (-?[0-9]+\\.[0-9]+) and InventoryException$")
+	@When("^add inventory: coffee (-?\\d+), milk (-?\\d+), sugar (-?\\d+), chocolate (-?\\d+) and InventoryException$")
 	public void add_inventory_and_exception(int coffeeAmt, int milkAmt, int sugarAmt, int chocoAmt) throws Throwable {
 		try{
 			coffeeMakerMain.UI_Input(new ChooseService(4));
 
 			coffeeMakerMain.UI_Input(new AddInventory(coffeeAmt,milkAmt,sugarAmt,chocoAmt));
-
+			fail("There is an exception");
 
 		}catch(NumberFormatException e){}
 
