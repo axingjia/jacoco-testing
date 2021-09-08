@@ -154,21 +154,21 @@ Given an empty recipe book
       Then status is success
 
 
-#Scenario: Add Inventory negative choco
-#    Given a default recipe book
-#   When add inventory: coffee 5, milk 4, sugar 5, chocolate -5 and InventoryException
+Scenario: Add Inventory negative choco
+    Given a default recipe book
+   When add inventory: coffee 5, milk 4, sugar 5, chocolate -5 and InventoryException
 
-# Scenario: Add Inventory negative milk
-#    Given a default recipe book
-#   When add inventory: coffee 5, milk -4, sugar 5, chocolate 5 and InventoryException
+ Scenario: Add Inventory negative milk
+    Given a default recipe book
+   When add inventory: coffee 5, milk -4, sugar 5, chocolate 5 and InventoryException
 
-#Scenario: Add Inventory negative coffee
-#    Given a default recipe book
-#   When add inventory: coffee -5, milk 4, sugar 5, chocolate 5 and InventoryException
+Scenario: Add Inventory negative coffee
+    Given a default recipe book
+   When add inventory: coffee -5, milk 4, sugar 5, chocolate 5 and InventoryException
 
-#Scenario: Add Inventory negative chocolate
-#    Given a default recipe book
-#   When add inventory: coffee 5, milk 4, sugar 5, chocolate -5 and InventoryException
+Scenario: Add Inventory negative chocolate
+    Given a default recipe book
+   When add inventory: coffee 5, milk 4, sugar 5, chocolate -5 and InventoryException
 
 #Scenario: Add Inventory float coffee
 #    Given a default recipe book
@@ -188,8 +188,27 @@ Given an empty recipe book
 
 
 
-#Scenario: Purchase Beverage until not enough ingredient
-#   Given an empty recipe book
-#   When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
-#      And insert 5 dollars and purchase recipe 1
-#      Then it is at WAITING modeE
+Scenario: Purchase Beverage until not enough ingredient
+   Given an empty recipe book
+   When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
+      And insert 5 dollars and purchase recipe 1
+      Then it is at WAITING mode
+
+Scenario: Purchase an empty recipe
+Given an empty recipe book
+When insert 5 dollars and purchase recipe 1
+Then it is at WAITING mode
+
+Scenario: two recipe is the same
+Given a default recipe book
+Then the recipe 1 is recipe 1
+
+Scenario: display recipe
+Given a default recipe book
+Then display recipe
+
+Scenario: Insert negative coin
+   Given an empty recipe book
+   When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
+      And insert -5 dollars
+      Then status is out of range

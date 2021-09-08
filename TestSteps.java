@@ -319,14 +319,14 @@ public class TestSteps {
 	}
 
 	@When("^add inventory: coffee (-?\\d+), milk (-?\\d+), sugar (-?\\d+), chocolate (-?\\d+) and InventoryException$")
-	public void add_inventory_and_exception(int coffeeAmt, int milkAmt, int sugarAmt, int chocoAmt) throws Throwable {
+	public void add_inventory_and_exception(String coffeeAmt, String milkAmt, String sugarAmt, String chocoAmt) throws Throwable {
 		try{
-			coffeeMakerMain.UI_Input(new ChooseService(4));
 
-			coffeeMakerMain.UI_Input(new AddInventory(coffeeAmt,milkAmt,sugarAmt,chocoAmt));
+
+			coffeeMakerMain.coffeeMaker.addInventory(coffeeAmt,milkAmt,sugarAmt,chocoAmt);
 			fail("There is an exception");
 
-		}catch(NumberFormatException e){}
+		}catch(InventoryException e){}
 
 
 
@@ -353,11 +353,18 @@ public class TestSteps {
 		assertEquals(coffeeMakerMain.coffeeMaker.checkInventory(),buf.toString());
 	}
 
-	@When("^insert (\\d+) dollars and purchase recipe (\\d+)$")
+	@When("^insert (-?\\d+) dollars and purchase recipe (\\d+)$")
 	public void purchase(int moneyInsert, int recipeId) throws  Throwable{
 		coffeeMakerMain.defaultCommands(new InsertMoney(moneyInsert));
 		coffeeMakerMain.UI_Input(new ChooseService(6));
 		coffeeMakerMain.UI_Input(new ChooseRecipe(recipeId-1));
+	}
+
+	@When("^insert (-?\\d+) dollars$")
+	public void insert_coin_only(int moneyInsert) throws  Throwable{
+		coffeeMakerMain.defaultCommands(new InsertMoney(moneyInsert));
+//		coffeeMakerMain.UI_Input(new ChooseService(6));
+//		coffeeMakerMain.UI_Input(new ChooseRecipe(recipeId-1));
 	}
 
 	@Then("^change is (\\d+) dollars$")
@@ -435,6 +442,11 @@ public class TestSteps {
 		assertEquals(coffeeMakerMain.status,CoffeeMakerUI.Status.OK);
 	}
 
+	@Then("^status is out of range$")
+	public void status_is_out_of_range() throws Throwable{
+		assertEquals(coffeeMakerMain.status,CoffeeMakerUI.Status.OUT_OF_RANGE);
+	}
+
 	@When("^add a empty recipe$")
 	public void add_a_empty_recipe(String name, String coffeeAmt, String milkAmt, String sugarAmt, String chocoAmt, String price) throws Throwable{
 		coffeeMakerMain.UI_Input(new ChooseService(1));
@@ -455,6 +467,21 @@ public class TestSteps {
 		coffeeMakerMain.UI_Input(new ChooseService(1));
 		coffeeMakerMain.UI_Input(new DescribeRecipe(null));
 //		assertEquals(1,1);
+	}
+
+	@Then("the recipe (\\d+) is recipe (\\d+)")
+	public void recipe_is_recipe(int recipeId, int recipeId2) throws Throwable{
+		Recipe r1=coffeeMakerMain.coffeeMaker.getRecipes()[recipeId-1];
+		Recipe r2=coffeeMakerMain.coffeeMaker.getRecipes()[recipeId2-1];
+
+		assertTrue(r1.equals(r2));
+
+	}
+
+	@Then("display recipe")
+	public void display_recipe() throws Throwable{
+		coffeeMakerMain.displayRecipes();
+		assertTrue(true);
 	}
 
 }
