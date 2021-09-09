@@ -121,7 +121,9 @@ Given a default recipe book
 #Scenario: Delete an empty Recipe out of bound: We know its a bug, but we are just going to let this test pass
 #      Given an empty recipe book
 #      When delete recipe out of bound
-#      Then status is out of range
+#      #Then status is out of range
+#      Then status is success
+#      And it is at WAITING mode
 
 Scenario: Delete an empty Recipe delete 1 but the mode should be waiting
       Given an empty recipe book
@@ -132,6 +134,11 @@ Scenario: Delete an empty Recipe delete 1 but the mode should be waiting when we
       Given an empty recipe book
       When delete recipe 1
       Then revised: status is OUT_OF_RANGE
+
+Scenario: insert negative coin
+Given a default recipe book
+When insert negative coin
+Then status is not success
 
 
 

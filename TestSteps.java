@@ -782,5 +782,15 @@ public class TestSteps {
 		}catch(ArrayIndexOutOfBoundsException e){}
 	}
 
+	@When("insert negative coin")
+	public void negative_coin() throws Throwable{
+		coffeeMakerMain.mode=CoffeeMakerUI.Mode.PURCHASE_BEVERAGE;
+
+		coffeeMakerMain.moneyInserted=-100;
+//		coffeeMakerMain.coffeeMaker.makeCoffee(1,-100);
+		coffeeMakerMain.UI_Input(new ChooseRecipe(1));
+//			fail("negative money inserted");
+	}
+
 
 }
