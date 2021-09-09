@@ -1,5 +1,5 @@
 # Summary
-* This is my caffee/nightmare-fueled testing project completion of a coffeeMaker software provided by Coursera Software Testing Automoation specialization. If you read the discussion forum. Lots of people will say this is impossible to complete. But not me, I am not easily giving up.
+* This is my caffee/nightmare-fueled testing project completion of a coffeeMaker software provided by Coursera Software Testing Automoation specialization. If you read the discussion forum. Lots of people will say this is impossible to complete. But not me, I am not easily giving up. Anyone who says this project is easy is lying.
 
 * In this project, I tried to crush 2 assignment in a week. Spent 16 hours 2 days straight to finish one assignment and the next.
 
@@ -104,3 +104,11 @@
 
 # About completing a task
 * When you think you are about to finish a task, don't trust this feeling. It takes me another 6 hours to get it completes from I feel it is completing soon.
+
+# About serious tech and deadline
+* I think, deadline can make tech all means nothing. Working on this project with a tight deadline requires many tech. The grader with docker and compiler and grading system, your code, and a server that can happen big enough load from all around the globe. If any of these components fails your project fails.
+
+# About education
+* Taking this course makes me realize, I don't like getting a master in computer science. I like programming, I think it is fantastic because you can create something out of nothing and you can make something good for the world that can reach tens of thousands of people.
+* But getting a degree in computer science is a very different thing. It means working on an assignment for 36 hours and still fails. Trying to grasp a complex subject in a very short time, and have no life besides working on your assignment.
+* So what's the end of it, I think MOOC will be a strategic move for those who wants both world. **This is my final conclusion**. But to level up my career, I will continue taking professional certificate like PMP, CISA, and Product management.

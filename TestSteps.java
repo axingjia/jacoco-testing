@@ -27,6 +27,7 @@ import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
 import org.apache.commons.math3.exception.OutOfRangeException;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
@@ -728,6 +729,14 @@ public class TestSteps {
 		coffeeMakerMain.mode=CoffeeMakerUI.Mode.EDIT_RECIPE;
 		coffeeMakerMain.UI_Input(new ChooseRecipe(2));
 		assertNotEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.OK);
+		try{
+		coffeeMakerMain.mode=CoffeeMakerUI.Mode.EDIT_RECIPE;
+		coffeeMakerMain.UI_Input(new ChooseRecipe(-1));
+		coffeeMakerMain.UI_Input(new DescribeRecipe(new Recipe()));
+		assertNotEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.OK);
+
+		}catch(ArrayIndexOutOfBoundsException e){}
+
 
 //
 //
@@ -798,6 +807,11 @@ public class TestSteps {
 		coffeeMakerMain.UI_Input(new ChooseRecipe(1));
 //		fail("money is -100"); //It doesn't work
 //			fail("negative money inserted");
+	}
+
+	@Then("check if recipe number is 3")
+	public void three_recipe(){
+		assertEquals(coffeeMakerMain.getRecipes().length,3);
 	}
 
 
