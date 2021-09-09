@@ -32,6 +32,7 @@
 8. When testing, it also means testing some software that you don't have access, meaning it's a blackbox testing. In this case, you need to test the software in a manual blackbox way
 9. don't forget to commit after you get a workable version
 10. After a day, look back on the comment out code and see maybe some are actually necessary
+11. Notice every inconsistency. Let at your local it is passing your version, but when it's on the server, it doesn't pass. It could mean you have hit the gold
 
 
 # About being flexible
@@ -56,9 +57,33 @@
 
 * If you scale both out, business will be travelling around the world, being a consultant, going onsite, talk to different stakeholders
 
-* An CS will be sitting at the office, working with more and more complex software, working with more people, thinking about more complex problem. And jumping a bigger, smarter community to solve bigger, harder problem
+* An CS will be sitting at the office, working with more and more complex software, working with more people, thinking about more complex problem. And jumping a bigger, smarter community to solve bigger, harder problem.
+
+### Question about Business and CS
+* The question is, can someone hold a job that requires both skill? 
+* I know BA and PM needs that. But at the beginning I guess they really can't really increase their craft, because 1. they don't have the total technical background to be given important technical work, and 2. They don't have the authority and seniority to meet with clients and go onsite.
+* I had the opportunity to work as a BA for half a year. At that company I was doing implementation, documentation, user training, and user support.
+* But the context is within the enterprise software. So the hard skill isn't really transferrable. And the software skill takes a lot longer to manifest.
+
+### The end goal of technology management
+* It is like people expects software engineer to be very good, and then transfer them to a new position where they have the authority, but not necessary business skill to manage
+
+### Conclusion?
+* For pure software engineer, I guess their path is get into tech lead, and take MBA and transition to a new company at technical management
+
+* What about me? I haven't had the total technical authority. But I can expect I will go a lot smoothier if I can get to the tech lead level.
+
 
 # Resource
 * Test coverage: https://medium.com/@nicklee1/why-test-code-coverage-targets-are-a-bad-idea-1b9b8ef711ef
 * PITEST is a mutant testing tool for java
 * 
+
+# The advantage of cucumber
+* Fast search
+* Fast edit
+* Fast readability
+* Fast delete
+
+# Heuristics
+* When you have the moment of "what's wrong here? I have tested everything". Do breakpoint tracing. It will save your life
