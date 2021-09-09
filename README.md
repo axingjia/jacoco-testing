@@ -30,6 +30,7 @@
 * At the end, you might realize the bug you thought is sus is actually not a bug, in this case, you have to replan your strategy before diving deep again.
 * To kill all the mutant. Sometimes you might need to reach 100% coverage
 8. When testing, it also means testing some software that you don't have access, meaning it's a blackbox testing. In this case, you need to test the software in a manual blackbox way
+9. don't forget to commit after you get a workable version
 
 
 # About being flexible
@@ -43,7 +44,7 @@
 * read tracestack
 * rinse and repeat
 
-* IMPORTANT: Whenever you there is a bit list of  test you need to do, don't think you can skip in 2 instead of one by one. No, it's slower
+* IMPORTANT: Whenever you there is a bit list of tests you need to do, don't think you can skip in 2 instead of one by one. No, it's slower
 
 # About business and computer science
 * A essence of software engineering is that the money you make depends on how skillful you are and how much time you have.

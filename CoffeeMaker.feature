@@ -112,6 +112,12 @@ Given a default recipe book
       Then status is not success
       And recipe 1 is empty
 
+#Scenario: Delete an empty Recipe out of bound
+#      Given an empty recipe book
+#      And delete recipe out of bound
+#      Then status is not success
+
+
 
 
 #   Scenario: Delete a Recipe 2
@@ -410,5 +416,10 @@ Then revised: status is WRONG_MODE
 #Given an empty recipe book
 #When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
 #Then testing mutant. Has exception 2
+
+# Scenario: Mutant Testing has exception out of bound
+#Given an empty recipe book
+#When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
+#Then testing mutant. Has exception 3
 
 

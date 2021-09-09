@@ -24,6 +24,7 @@ import edu.ncsu.csc326.coffeemaker.CoffeeMaker;
 import edu.ncsu.csc326.coffeemaker.UICmd.*;
 import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
 import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
+import org.apache.commons.math3.exception.OutOfRangeException;
 
 import java.io.*;
 import java.util.concurrent.TimeUnit;
@@ -247,6 +248,17 @@ public class TestSteps {
 
 		coffeeMakerMain.UI_Input(new ChooseService(2));
 		coffeeMakerMain.UI_Input(new ChooseRecipe(recipeId-1));
+
+	}
+
+	@When("^delete recipe out of bound$")
+	public void delete_recipe_out_of_bound() throws Throwable{
+		try{
+		coffeeMakerMain.UI_Input(new ChooseService(2));
+		coffeeMakerMain.UI_Input(new ChooseRecipe(100));
+			fail("Out of bound");
+		}catch(OutOfRangeException e){}
+		catch(ArrayIndexOutOfBoundsException e){}
 
 	}
 
@@ -670,8 +682,18 @@ public class TestSteps {
 		coffeeMakerMain.UI_Input(new AddInventory(0,0,0,chocoAmt));
 	}
 
-	@Then("testing mutant. Has exception (\\d)")
-	public void mutant(int hasException) throws Throwable{
+	@Then("testing mutant. Has exception 3")
+	public void exception_3() throws  Throwable{
+		try{
+			coffeeMakerMain.mode=CoffeeMakerUI.Mode.EDIT_RECIPE;
+			coffeeMakerMain.UI_Input(new ChooseRecipe(-1));
+//			assertNotEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.OK);
+			fail("Out of bound");
+		}catch(ArrayIndexOutOfBoundsException e){}
+	}
+
+	@Then("testing mutant. Has exception 0")
+	public void mutant() throws Throwable{
 		CheckInventory cmd=new CheckInventory();
 		assertEquals(cmd.getInventory(),null);
 		coffeeMakerMain.UI_Input(new InsertMoney(0));
@@ -679,7 +701,10 @@ public class TestSteps {
 		coffeeMakerMain.displayRecipes();
 		coffeeMakerMain.mode=CoffeeMakerUI.Mode.EDIT_RECIPE;
 		coffeeMakerMain.UI_Input(new ChooseRecipe(2));
-		assertEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.OUT_OF_RANGE);
+		assertNotEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.OK);
+
+
+
 		coffeeMakerMain.mode=CoffeeMakerUI.Mode.EDIT_RECIPE;
 		coffeeMakerMain.UI_Input(new DescribeRecipe(new Recipe()));
 		assertEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.RECIPE_NOT_ADDED);
@@ -712,42 +737,19 @@ public class TestSteps {
 		assertEquals(v.getSugar(),0);
 
 		Recipe r= new Recipe();
-//		r.setAmtCoffee(5+"");
-//		r.setAmtMilk(5+"");
-//		r.setAmtSugar(5+"");
-//		r.setAmtChocolate(5+"");
-//		RecipeBook book=new RecipeBook();
-//		book.addRecipe(r);
-//		assertNotEquals(book.editRecipe(0,r),null);
 
 
-		//Trying test print message:
-
-
-//		ByteArrayOutputStream out = new ByteArrayOutputStream();
-//		System.setOut(new PrintStream(out));
-//		coffeeMakerMain.coffeeMaker.makeCoffee(3,10);
-//		String consoleOutput = "No recipe!"+System.getProperty("line.separator");
-//		assertEquals(consoleOutput, out.toString());
+//		if (hasException==2){
+//			try{
+//				r.setAmtChocolate(""+(-1));
+//				r.setAmtSugar(""+(-1));
+//				r.setAmtMilk(""+(-1));
+//				r.setAmtCoffee(""+(-1));
+//				fail("there should be an exception");
 //
-//		ByteArrayOutputStream out2 = new ByteArrayOutputStream();
-//		System.setOut(new PrintStream(out2));
-//		coffeeMakerMain.coffeeMaker.makeCoffee(0,100);
-//		String consoleOutput2 = "using recipes failed: "+coffeeMakerMain.coffeeMaker.getRecipes()[0].getPrice()+System.getProperty("line.separator");
-//		assertEquals(consoleOutput2, out2.toString());
-
-
-		if (hasException==2){
-			try{
-				r.setAmtChocolate(""+(-1));
-				r.setAmtSugar(""+(-1));
-				r.setAmtMilk(""+(-1));
-				r.setAmtCoffee(""+(-1));
-				fail("there should be an exception");
-
-			} catch(RecipeException e){}
-
-		}
+//			} catch(RecipeException e){}
+//
+//		}
 	}
 
 
