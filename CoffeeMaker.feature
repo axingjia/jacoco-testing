@@ -59,11 +59,11 @@ Given a default recipe book
 #    And input describe recipe command
 #    Then status is wrong mode
 
-# Scenario: Choose edit and add inventory
-#Given an empty recipe book
-#  When choose EDIT_RECIPE command service
-#    And input add inventory command
-#    Then status is not success
+Scenario: Choose edit and add inventory
+Given an empty recipe book
+  When choose EDIT_RECIPE command service
+    And input add inventory command
+    Then status is not success
 
 #Scenario: Choose delete and describe recipe should work
 #Given an empty recipe book
@@ -118,10 +118,10 @@ Given a default recipe book
       Then status is not success
       And recipe 1 is empty
 
-#Scenario: Delete an empty Recipe out of bound
-#      Given an empty recipe book
-#      And delete recipe out of bound
-#      Then status is not success
+Scenario: Delete an empty Recipe out of bound
+      Given an empty recipe book
+      And delete recipe out of bound
+      Then status is not success
 
 
 
