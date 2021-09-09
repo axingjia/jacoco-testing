@@ -1,7 +1,7 @@
 # Summary
 * This is my caffee/nightmare-fueled testing project completion of a coffeeMaker software provided by Coursera Software Testing Automoation specialization. If you read the discussion forum. Lots of people will say this is impossible to complete. But not me, I am not easily giving up.
 
-* In this project, I tried to crush 2 assignment in a week. Spent 8 hours on the weekend to finish one assignment and the next.
+* In this project, I tried to crush 2 assignment in a week. Spent 16 hours 2 days straight to finish one assignment and the next.
 
 * In this project I use cucumber behaviour-driven development and use Jacoco Coverage Report for the software. it covers 185 test cases with the testing codebase spanning around 600 lines of code.
 
@@ -10,7 +10,7 @@
 * Another thing I learn from this 48 hours intense project experience is that being a serious software engineer requires you to sit there for 8 or even 12 hours everyday debugging the code and try to discover any small detail of the software. Also, the behavioural way of given..when..and then is a great way to test software.
 
 # The hardest part
-* The hardest part is testing the cases one by one finding out which one fail the correct version of the software. And when the project is almost done, polishing the software and having the discipline to go through it and not giving up really tests your drive.
+* The hardest part is testing the cases one by one finding out which one fail the correct version of the software. And when the project is almost done, polishing the software and having the discipline to go through it and not giving up really tests your drive and discipline.
 
 # About journaling for code is good for your soul
 * Debugging and polishing by yourself is probably the most tedious and lonliest task you have to do as a software engineer. Developing, testing, debugging, submitting, finding out there is debug and error, and test, debug, submit, and find out more bugs... It can be hard on the soul even if you are passionate about this profession.
@@ -55,15 +55,27 @@
 
 * In comparison, the essence of business is that you go around the world and talk to different clients.
 
-* If you scale both out, business will be travelling around the world, being a consultant, going onsite, talk to different stakeholders
+* If you scale both out, business will be travelling around the world, being a consultant, going onsite, talk to different stakeholders. Exchange resource to create bigger resource for our own and giving resource and benefit to other people.
 
 * An CS will be sitting at the office, working with more and more complex software, working with more people, thinking about more complex problem. And jumping a bigger, smarter community to solve bigger, harder problem.
+
+* You can say CS is generating stuff from nothing. And business is exchanging precious values that you **already have.**
+
+* So what is this resource for the business. There are human resource, there is money (finance), there is reputation (marketing), there is technical know how and software license, there is the knowledge of the business and your operation.
+
+* So I guess the success of a business graduate is to rise up through the rank in a big company.
+
+* And the success of a CS graduate is to work on bigger, more complex software system.
 
 ### Question about Business and CS
 * The question is, can someone hold a job that requires both skill? 
 * I know BA and PM needs that. But at the beginning I guess they really can't really increase their craft, because 1. they don't have the total technical background to be given important technical work, and 2. They don't have the authority and seniority to meet with clients and go onsite.
-* I had the opportunity to work as a BA for half a year. At that company I was doing implementation, documentation, user training, and user support.
+* I had the opportunity to work as a BA for 8 months. At that company I was doing implementation, documentation, user training, and user support and some SQL query.
 * But the context is within the enterprise software. So the hard skill isn't really transferrable. And the software skill takes a lot longer to manifest.
+
+* How about full on business. In marketing, in human resource, in accounting, in finance.
+* Yes, they are all very important part for running a business
+* but essentially you are a cot in a machine that helps to make bigger money for someone up top
 
 ### The end goal of technology management
 * It is like people expects software engineer to be very good, and then transfer them to a new position where they have the authority, but not necessary business skill to manage

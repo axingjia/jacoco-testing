@@ -454,13 +454,13 @@ Then revised: status is WRONG_MODE
 
 
 
- Scenario: purchase with out of bound we know it should throw a out of bound exception, but its now just a success
-Given an empty recipe book
-When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
-And purchase at recipe 100 should throw exception
+# Scenario: purchase with out of bound we know it should throw a out of bound exception, but its now just a success and its in beverage mode
+#Given an empty recipe book
+#When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
+#And purchase at recipe 100 should throw exception
 #And status is not success
-And status is success
-And it is at WAITING mode
+#And status is success
+#And it is not at purchase mode
 
 
 
