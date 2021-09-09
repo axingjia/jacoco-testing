@@ -417,9 +417,9 @@ Then revised: status is WRONG_MODE
 #When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
 #Then testing mutant. Has exception 2
 
-# Scenario: Mutant Testing has exception out of bound
-#Given an empty recipe book
-#When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
-#Then testing mutant. Has exception 3
+ Scenario: Mutant Testing has exception out of bound
+Given an empty recipe book
+When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
+Then testing mutant. Has exception 3
 
 
