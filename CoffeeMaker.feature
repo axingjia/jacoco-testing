@@ -123,6 +123,16 @@ Given a default recipe book
 #      When delete recipe out of bound
 #      Then status is out of range
 
+Scenario: Delete an empty Recipe delete 1 but the mode should be waiting
+      Given an empty recipe book
+      When delete recipe 1
+      Then it is at WAITING mode
+
+Scenario: Delete an empty Recipe delete 1 but the mode should be waiting when we know this should fail
+      Given an empty recipe book
+      When delete recipe 1
+      Then revised: status is OUT_OF_RANGE
+
 
 
 

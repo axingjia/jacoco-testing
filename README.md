@@ -87,3 +87,6 @@
 
 # Heuristics
 * When you have the moment of "what's wrong here? I have tested everything". Do breakpoint tracing. It will save your life
+
+# About completing a task
+* When you think you are about to finish a task, don't trust this feeling. It takes me another 6 hours to get it completes from I feel it is completing soon.
