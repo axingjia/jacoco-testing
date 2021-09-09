@@ -59,11 +59,17 @@ Given a default recipe book
 #    And input describe recipe command
 #    Then status is wrong mode
 
-#  Scenario: Choose delete and purchase
+ Scenario: Choose edit and add inventory
+Given an empty recipe book
+  When choose EDIT_RECIPE command service
+    And input add inventory command
+    Then status is wrong mode
+
+#Scenario: Choose delete and describe recipe should work
 #Given an empty recipe book
 #  When choose DELETE_RECIPE command service
 #    And input describe recipe command
-#    Then it is at WAITING mode
+#    Then status is success
 
 Scenario: Choose inventory and purchase
 Given a default recipe book
@@ -422,15 +428,14 @@ Then revised: status is WRONG_MODE
 #When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
 #Then testing mutant. Has exception 3
 
-# Scenario: delete recipe and choose -1 recipe
-#Given an empty recipe book
-#When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
-#Then testing mutant. Has exception 4
 
-# Scenario: purchase with negative amount
-#Given an empty recipe book
-#When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
-#And purchase with negative amount should throw exception
+
+ Scenario: purchase with out of bound
+Given an empty recipe book
+When add a recipe with name of Chacha, 20 units of coffee, 20 units of milk, and 20 units of sugar, and 20 units of chocolate, and price is 4 dollars
+And purchase at recipe 100 should throw exception
+
+
 
 
 

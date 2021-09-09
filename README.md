@@ -31,6 +31,7 @@
 * To kill all the mutant. Sometimes you might need to reach 100% coverage
 8. When testing, it also means testing some software that you don't have access, meaning it's a blackbox testing. In this case, you need to test the software in a manual blackbox way
 9. don't forget to commit after you get a workable version
+10. After a day, look back on the comment out code and see maybe some are actually necessary
 
 
 # About being flexible

@@ -475,6 +475,14 @@ public class TestSteps {
 		coffeeMakerMain.UI_Input(new ChooseRecipe(choose));
 	}
 
+	@When("^input add inventory command")
+	public void choose_command_inventory() throws  Throwable{
+
+		coffeeMakerMain.UI_Input(new AddInventory(1,1,1,1));
+	}
+
+
+
 	@When("^input describe recipe command")
 	public void add_command() throws  Throwable{
 
@@ -763,9 +771,13 @@ public class TestSteps {
 //		}
 	}
 
-	@When("purchase with negative amount should throw exception")
+	@When("purchase at recipe 100 should throw exception")
 	public void purchase_with_negative()throws  Throwable{
-//		coffeeMakerMain.
+		try{
+		coffeeMakerMain.mode=CoffeeMakerUI.Mode.PURCHASE_BEVERAGE;
+		coffeeMakerMain.UI_Input(new ChooseRecipe(100));
+			fail("out of bound");
+		}catch(ArrayIndexOutOfBoundsException e){}
 	}
 
 
