@@ -692,6 +692,17 @@ public class TestSteps {
 		}catch(ArrayIndexOutOfBoundsException e){}
 	}
 
+	@Then("testing mutant. Has exception 4")
+	public void exception_4() throws  Throwable{
+		try{
+		coffeeMakerMain.mode=CoffeeMakerUI.Mode.DELETE_RECIPE;
+		coffeeMakerMain.UI_Input(new ChooseRecipe(-1));
+		fail("it shouldn't have -1 delete recipe");
+		assertNotEquals(coffeeMakerMain.getStatus(),CoffeeMakerUI.Status.OK);
+
+		}catch(ArrayIndexOutOfBoundsException e){}
+	}
+
 	@Then("testing mutant. Has exception 0")
 	public void mutant() throws Throwable{
 		CheckInventory cmd=new CheckInventory();
@@ -750,6 +761,11 @@ public class TestSteps {
 //			} catch(RecipeException e){}
 //
 //		}
+	}
+
+	@When("purchase with negative amount should throw exception")
+	public void purchase_with_negative()throws  Throwable{
+//		coffeeMakerMain.
 	}
 
 

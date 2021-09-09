@@ -52,7 +52,10 @@
 * The problem with that, is because it's hard to scale. Yes, you can keep taking more courses and doing more projects and work on harder project
 
 * In comparison, the essence of business is that you go around the world and talk to different clients.
-*
+
+* If you scale both out, business will be travelling around the world, being a consultant, going onsite, talk to different stakeholders
+
+* An CS will be sitting at the office, working with more and more complex software, working with more people, thinking about more complex problem. And jumping a bigger, smarter community to solve bigger, harder problem
 
 # Resource
 * Test coverage: https://medium.com/@nicklee1/why-test-code-coverage-targets-are-a-bad-idea-1b9b8ef711ef
