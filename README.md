@@ -77,6 +77,8 @@
 * Yes, they are all very important part for running a business
 * but essentially you are a cot in a machine that helps to make bigger money for someone up top
 
+* To be honest, it is pretty hard rising up the rank as an asian-american in north america. But I am sure you can do that in asia, like Singapore, Hongkong, Korea or Japan.
+
 ### The end goal of technology management
 * It is like people expects software engineer to be very good, and then transfer them to a new position where they have the authority, but not necessary business skill to manage
 
