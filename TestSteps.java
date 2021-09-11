@@ -625,11 +625,6 @@ public class TestSteps {
 		assertEquals(coffeeMakerMain.status,CoffeeMakerUI.Status.WRONG_MODE);
 	}
 
-	@Then("^it is not at purchase mode$")
-	public void status_is_purchase_mode() throws Throwable{
-		assertEquals(coffeeMakerMain.mode,CoffeeMakerUI.Mode.PURCHASE_BEVERAGE);
-	}
-
 
 
 	@When("^add a empty recipe$")
@@ -787,16 +782,14 @@ public class TestSteps {
 //		}
 	}
 
-	@When("^purchase at recipe 100 should throw exception")
+	@When("purchase at recipe 100 should throw exception")
 	public void purchase_with_negative()throws  Throwable{
 		try{
 		coffeeMakerMain.mode=CoffeeMakerUI.Mode.PURCHASE_BEVERAGE;
 		coffeeMakerMain.UI_Input(new ChooseRecipe(100));
 
-		}catch(ArrayIndexOutOfBoundsException e){
-			throw new RecipeException();
-		}
-	}
+			fail("out of bound");
+		}catch(ArrayIndexOutOfBoundsException e){}
 
 	@When("insert negative coin")
 	public void negative_coin() throws Throwable{
@@ -805,7 +798,6 @@ public class TestSteps {
 		coffeeMakerMain.moneyInserted=-100;
 //		coffeeMakerMain.coffeeMaker.makeCoffee(1,-100);
 		coffeeMakerMain.UI_Input(new ChooseRecipe(1));
-//		fail("money is -100"); //It doesn't work
 //			fail("negative money inserted");
 	}
 
