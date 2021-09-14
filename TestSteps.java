@@ -783,14 +783,15 @@ public class TestSteps {
 	}
 
 	@When("purchase at recipe 100 should throw exception")
-	public void purchase_with_negative()throws  Throwable{
-		try{
-		coffeeMakerMain.mode=CoffeeMakerUI.Mode.PURCHASE_BEVERAGE;
-		coffeeMakerMain.UI_Input(new ChooseRecipe(100));
+	public void purchase_with_negative() throws  Throwable {
+		try {
+			coffeeMakerMain.mode = CoffeeMakerUI.Mode.PURCHASE_BEVERAGE;
+			coffeeMakerMain.UI_Input(new ChooseRecipe(100));
 
 			fail("out of bound");
-		}catch(ArrayIndexOutOfBoundsException e){}
-
+		} catch (ArrayIndexOutOfBoundsException e) {
+		}
+	}
 	@When("insert negative coin")
 	public void negative_coin() throws Throwable{
 		coffeeMakerMain.mode=CoffeeMakerUI.Mode.PURCHASE_BEVERAGE;
@@ -802,7 +803,7 @@ public class TestSteps {
 	}
 
 	@Then("check if recipe number is 3")
-	public void three_recipe(){
+	public void three_recipe() throws Throwable{
 		assertEquals(coffeeMakerMain.getRecipes().length,3);
 	}
 
